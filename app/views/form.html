@@ -1,0 +1,112 @@
+<div class="jumbotron">
+
+  <h1 class="text-center">
+    Hello {{ profile.firstName | limitTo:8 }}{{profile.firstName.length > 8 ? '...' : ''}}
+  </h1>
+
+  <form name="profile_form" novalidate>
+
+    <!-- First name -->
+    <div class="form-group has-feedback"
+         ng-class="{'has-error': profile_form.first_name.$invalid && profile_form.first_name.$dirty,
+                    'has-success': !profile_form.first_name.$invalid && profile_form.first_name.$dirty}">
+
+      <label for="first-name">First Name</label>
+      <input type="text" class="form-control" id="first-name" name="first_name" ng-model="profile.firstName" required>
+
+      <span ng-show="profile_form.first_name.$invalid && profile_form.first_name.$dirty"
+            class="glyphicon glyphicon-remove form-control-feedback"></span>
+
+      <span ng-show="!profile_form.first_name.$invalid && profile_form.first_name.$dirty"
+            class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+      <span class="help-block"
+            ng-show="profile_form.first_name.$invalid && profile_form.first_name.$dirty">
+        Please type in your first name
+      </span>
+    </div>
+
+    <!-- Last name -->
+    <div class="form-group has-feedback"
+         ng-class="{'has-error': profile_form.last_name.$invalid && profile_form.last_name.$dirty,
+                    'has-success': !profile_form.last_name.$invalid && profile_form.last_name.$dirty}">
+
+      <label for="last-name">Last Name</label>
+      <input type="text" class="form-control" id="last-name" name="last_name" ng-model="profile.lastName" required>
+
+      <span ng-show="profile_form.last_name.$invalid && profile_form.last_name.$dirty"
+            class="glyphicon glyphicon-remove form-control-feedback"></span>
+
+      <span ng-show="!profile_form.last_name.$invalid && profile_form.last_name.$dirty"
+            class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+      <span class="help-block"
+            ng-show="profile_form.last_name.$invalid && profile_form.last_name.$dirty">
+        Please type in your last name
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group has-feedback"
+         ng-class="{'has-error': profile_form.email.$invalid && profile_form.email.$dirty,
+                    'has-success': !profile_form.email.$invalid && profile_form.email.$dirty}">
+
+      <label for="email">Email Address</label>
+      <input type="email" class="form-control" id="email" name="email" ng-model="profile.emailAddress" required>
+
+      <span ng-show="profile_form.email.$invalid && profile_form.email.$dirty"
+            class="glyphicon glyphicon-remove form-control-feedback"></span>
+
+      <span ng-show="!profile_form.email.$invalid && profile_form.email.$dirty"
+            class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+      <span class="help-block"
+            ng-show="profile_form.email.$error.required && profile_form.email.$dirty">
+        Please type in your email
+      </span>
+
+      <span class="help-block"
+            ng-show="profile_form.email.$error.email && profile_form.email.$dirty">
+        Please type in a valid email
+      </span>
+    </div>
+
+    <!-- DOB -->
+    <div class="form-group has-feedback"
+         ng-class="{'has-error': profile_form.dob.$invalid && profile_form.dob.$dirty,
+                    'has-success': !profile_form.dob.$invalid && profile_form.dob.$dirty}">
+
+      <label for="dob">Date of birth</label>
+      <input type="date" class="form-control" id="dob" name="dob" ng-model="profile.dob"
+             max="2015-06-11" min="1900-01-01" placeholder="yyyy-mm-dd" required>
+
+      <span ng-show="profile_form.dob.$invalid && profile_form.dob.$dirty"
+            class="glyphicon glyphicon-remove form-control-feedback"></span>
+
+      <span ng-show="!profile_form.dob.$invalid && profile_form.dob.$dirty"
+            class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+      <span class="help-block"
+            ng-show="profile_form.dob.$invalid && profile_form.dob.$dirty">
+        Please select your
+        <span ng-show="profile_form.dob.$error.max || profile_form.dob.$error.min">correct</span>
+        date of birth in format yyyy-mm-dd
+      </span>
+    </div>
+
+    <!-- Subscribed -->
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="profile.subscribed"> Subscribed
+      </label>
+    </div>
+
+    <!-- Submit button -->
+    <button class="btn btn-default" ng-click="submit()"
+            ng-disabled="profile_form.first_name.$invalid
+            || profile_form.last_name.$invalid
+            || profile_form.email.$invalid
+            || profile_form.dob.$invalid">Submit
+    </button>
+  </form>
+</div>
